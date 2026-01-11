@@ -1,0 +1,59 @@
+{ pkgs, ... }:
+let
+  user = "svenh";
+
+in
+{
+  environment.systemPackages = with pkgs; [
+    gnome-keyring
+    seahorse
+  ];
+
+  # Framework to let applications request elevated permissions
+  security.polkit.enable = true;
+
+  services.dbus.packages = [ pkgs.gnome-keyring ];
+
+  # login
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+
+    settings = {
+      # Autologin = {
+      #   Session = "niri";
+      #   User = "${user}";
+      # };
+      daemon = {
+        AutomaticLoginEnable = "True";
+        AutomaticLogin = "${user}";
+      };
+    };
+  };
+
+  # gnome-keyring service
+  services.gnome.gnome-keyring.enable = true;
+
+  # allow auto-unlock of gnome-keyring (requires password match)
+  security.pam.services = {
+    login.enableGnomeKeyring = true;
+    gdm.enableGnomeKeyring = true;
+  };
+
+  systemd = {
+    # Allow apps to request authentication via system authentication service (gnome-keyring)
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+}
