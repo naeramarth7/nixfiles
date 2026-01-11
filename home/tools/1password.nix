@@ -5,21 +5,23 @@ let
 in
 {
 
-  home.packages = with pkgs; [
-    _1password-cli
-    _1password-gui
-  ];
+  # home.packages = with pkgs; [
+  #   _1password-cli
+  #   _1password-gui
+  # ];
 
-  # Allow communication between GUI (e.g. browser extensions and 1Password)
-  nixpkgs = {
-    overlays = [
-      (final: prev: {
-        _1password-gui = prev._1password-gui.override {
-          polkitPolicyOwners = [ "svenh" ];
-        };
-      })
-    ];
-  };
+  # Does not seem to work via home manager
+  #
+  # Allow communication between 1Password and browser extensions
+  # nixpkgs = {
+  #   overlays = [
+  #     (final: prev: {
+  #       _1password-gui = prev._1password-gui.override {
+  #         polkitPolicyOwners = [ "svenh" ];
+  #       };
+  #     })
+  #   ];
+  # };
 
   # Set 1Password as ssh agent
   programs.ssh = {

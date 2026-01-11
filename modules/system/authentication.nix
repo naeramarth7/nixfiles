@@ -56,4 +56,11 @@ in
       };
     };
   };
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Does not work via home manager, so this is added here
+    polkitPolicyOwners = [ "svenh" ];
+  };
 }
