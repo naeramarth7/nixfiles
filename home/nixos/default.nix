@@ -1,14 +1,13 @@
-{ user, pkgs, ... }:
+{ account, ... }:
 {
   programs.home-manager.enable = true;
 
   home = {
-    username = user.accountName;
-    homeDirectory = "/home/${user.accountName}";
+    username = account.username;
   };
 
   imports = [
-    ../../shared/core
+    ../shared/core
 
     ./noctalia
     ./development

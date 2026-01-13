@@ -3,9 +3,8 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  user,
+  account,
   pkgs,
-  lib,
   ...
 }:
 
@@ -13,14 +12,18 @@
   imports = [
     # Include the results of the hardware scan.
     # This file should usually be generated on nixos installation.
-    /etc/nixos/hardware-configuration.nix
+    #
+    # Requires --impure flag as it's outside of the repo though.
+    # Therefore we keep the hardware-configuration as part of the repo for now.
+    #
+    # /etc/nixos/hardware-configuration.nix
 
     # Core modules
-    ../../modules/shared/code
+    ../../modules/shared/core
     ../../modules/nixos/core
   ];
 
-  nixpkgs.config.allowUnfree = lib.mkDefault true;
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -28,32 +31,30 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
-  boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Popuplate keyring with luks password
-  boot.initrd.systemd.enable = lib.mkDefault true;
+  boot.initrd.systemd.enable = true;
 
   # Use latest kernel.
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set your time zone.
-  time.timeZone = lib.mkDefault "Europe/Berlin";
+  time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user.accountName} = lib.mkDefault {
+  users.users.${account.username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-    ];
   };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = lib.mkDefault with pkgs; [
+  environment.systemPackages = with pkgs; [
     curl
     vim
     wget

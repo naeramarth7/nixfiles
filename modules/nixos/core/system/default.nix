@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   imports = [
     ./authentication.nix
     ./display.nix

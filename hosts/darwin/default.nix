@@ -1,4 +1,4 @@
-{ user, ... }:
+{ account, ... }:
 {
   imports = [
     ../../modules/darwin/core
@@ -6,7 +6,7 @@
   ];
 
   system = {
-    primaryUser = user.accountName;
+    primaryUser = account.username;
     stateVersion = 6;
   };
 }

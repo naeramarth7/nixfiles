@@ -1,4 +1,4 @@
-{ user, pkgs, ... }:
+{ account, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     gnome-keyring
@@ -13,13 +13,9 @@
     wayland = true;
 
     settings = {
-      # Autologin = {
-      #   Session = "niri";
-      #   User = "${user.accountName}";
-      # };
       daemon = {
         AutomaticLoginEnable = "True";
-        AutomaticLogin = "${user.accountName}";
+        AutomaticLogin = "${account.username}";
       };
     };
   };
@@ -57,6 +53,6 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ user.accountName ];
+    polkitPolicyOwners = [ account.username ];
   };
 }

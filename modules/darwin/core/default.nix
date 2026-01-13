@@ -1,5 +1,4 @@
-{ user, pkgs, ... }:
-{
+_: {
   nixpkgs.config.allowUnfree = true;
 
   imports = [

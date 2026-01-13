@@ -87,8 +87,8 @@
       ...
     }:
     let
-      user = {
-        accountName = "sven.herrle";
+      account = {
+        username = "svenh";
         fullName = "Sven Herrle";
       };
       linuxSystems = [
@@ -130,19 +130,19 @@
         # "rollback" = mkApp "rollback" system;
       };
       mkNixosConfig =
-        user: hostPath:
+        account: hostPath:
         (nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs user; };
+          specialArgs = { inherit inputs account; };
 
           modules = [
             (
-              { pkgs, ... }:
+              { ... }:
               {
                 nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
               }
             )
 
-            ./hosts/nixos/default.nix
+            ./hosts/nixos
             hostPath
 
             home-manager.nixosModules.home-manager
@@ -151,23 +151,23 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
 
-                users.${user.accountName} = import ./home/nixos;
-                extraSpecialArgs = { inherit inputs; };
+                users.${account.username} = import ./home/nixos;
+                extraSpecialArgs = { inherit inputs account; };
               };
             }
           ];
         });
       mkDarwinConfig =
-        user: system:
+        account: system:
         (darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit inputs user; };
+          specialArgs = { inherit inputs account; };
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
-                user = user.accountName; # overriden on host level
+                user = account.username; # overriden on host level
                 enable = true;
                 taps = {
                   "homebrew/homebrew-core" = homebrew-core;
@@ -194,17 +194,19 @@
 
       nixosConfigurations =
         # TODO
-        (nixpkgs.lib.genAttrs linuxSystems (system: mkNixosConfig user ./hosts/xsh-workstation-nix-01.nix))
+        (nixpkgs.lib.genAttrs linuxSystems (
+          system: mkNixosConfig account ./hosts/nixos/xsh-workstation-nix-01
+        ))
         # Host-specific configurations
         // {
-          xsh-workstation-nix-01 = mkNixosConfig user ./hosts/xsh-workstation-nix-01.nix;
+          xsh-workstation-nix-01 = mkNixosConfig account ./hosts/nixos/xsh-workstation-nix-01;
         };
 
       darwinConfigurations =
-        (nixpkgs.lib.genAttrs darwinSystems (system: mkDarwinConfig user system))
+        (nixpkgs.lib.genAttrs darwinSystems (system: mkDarwinConfig account system))
         # Named host configurations
         // {
-          MB-HY34415F46 = mkDarwinConfig (user // { accountName = "sven.herrle"; }) "aarch64-darwin";
+          MB-HY34415F46 = mkDarwinConfig (account // { username = "sven.herrle"; }) "aarch64-darwin";
         };
     };
 

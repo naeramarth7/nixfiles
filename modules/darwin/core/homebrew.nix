@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   homebrew.brews = [
     # Tools
     "chezmoi" # dotfiles management. Might be completely replaced by nix later.

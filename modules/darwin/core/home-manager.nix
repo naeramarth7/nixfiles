@@ -1,5 +1,5 @@
 {
-  user,
+  account,
   pkgs,
   config,
   ...
@@ -7,9 +7,10 @@
 {
   programs.zsh.enable = true;
 
-  users.users.${user.accountName} = {
-    name = "${user.accountName}";
-    home = "/Users/${user.accountName}";
+  users.users.${account.username} = {
+    name = "${account.username}";
+    isNormalUser = true;
+    home = "/Users/${account.username}";
     isHidden = false;
     shell = pkgs.zsh;
   };
@@ -19,7 +20,7 @@
     # use taps from nix-homebrew module
     taps = builtins.attrNames config.nix-homebrew.taps;
     caskArgs = {
-      appdir = "/Users/${user.accountName}/Applications";
+      appdir = "/Users/${account.username}/Applications";
     };
     onActivation = {
       cleanup = "uninstall";
@@ -32,7 +33,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.${user.accountName} = {
+    users.${account.username} = {
       imports = [
         ../../../home/darwin/core
         ../../../home/darwin/work
