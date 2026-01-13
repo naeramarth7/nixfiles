@@ -13,7 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     # This file should usually be generated on nixos installation.
-    /etc/nix/hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
 
     # Core modules
     ../../modules/shared/code
