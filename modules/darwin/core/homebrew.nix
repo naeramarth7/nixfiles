@@ -39,13 +39,6 @@
     "whatsapp"
 
     # Tools
-    {
-      name = "1password";
-      args = {
-        appdir = "/Applications";
-      };
-    }
-    "1password-cli"
     "appcleaner"
     "bettertouchtool"
     "cyberduck"
