@@ -19,7 +19,9 @@
 
   homebrew.casks = [
     # Internet
-    # "firefox"
+    # This is the actual version used on macOS instead of the nixpkg one.
+    # See comments on nixpkg for background.
+    "firefox"
 
     # Productivity
     "alfred"

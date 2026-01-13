@@ -7,6 +7,9 @@
     pywalfox-native # sync noctalia theme with firefox
   ];
 
+  # This doesn't play nice with 1Password on macOS unless it's signed by apple.
+  # Let's add it anyways to be able to make use the policies.
+  # Though we actually prefer the homebrew version on macOS.
   programs.firefox = {
     enable = true;
     languagePacks = [ "en-US" ];
