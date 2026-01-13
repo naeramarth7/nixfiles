@@ -1,8 +1,12 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = (
+      pkgs.vscode.override {
+        commandLineArgs = "--password-store='gnome-libsecret'";
+      }
+    );
 
     profiles.default.extensions =
       with pkgs.open-vsx;
@@ -24,6 +28,12 @@
 
         # language support
         kdl-org.kdl
+
+        # AI
+        # Disabled as they required the newest version of vscode / vscodium
+        # nixpkpgs is a bit slow though
+        # github.copilot
+        # github.copilot-chat
       ]);
   };
 

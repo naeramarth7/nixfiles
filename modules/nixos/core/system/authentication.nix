@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     gnome-keyring
+    libsecret
     seahorse
   ];
 
