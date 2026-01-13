@@ -1,3 +1,5 @@
+# nixfiles
+
 ## Manual steps
 
 ### noctalia-shell
@@ -16,3 +18,7 @@ Start a nix repl and import nixpkgs to be able to evaluate the environment.
 nix repl
 nix-repl> :l <nixpkgs>
 ```
+
+## Credits
+
+- https://github.com/dustinlyons/nixos-config
