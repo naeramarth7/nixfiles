@@ -51,8 +51,6 @@ let
       eamodio.gitlens
       editorconfig.editorconfig
       formulahendry.auto-rename-tag
-      github.copilot
-      github.copilot-chat
       hverlin.mise-vscode
       jrebocho.vscode-random
       naumovs.color-highlight
@@ -62,6 +60,10 @@ let
       usernamehw.errorlens
       vincaslt.highlight-matching-tag
       wayou.vscode-todo-highlight
+
+      # Versions from nix-vscode-extensions expect insider builds
+      # github.copilot
+      # github.copilot-chat
     ];
     linux = with pkgs.vscode-marketplace; [
 
