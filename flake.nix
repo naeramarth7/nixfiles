@@ -28,7 +28,7 @@
       Darwin specific
     */
 
-    darwin = {
+    nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -79,7 +79,7 @@
       nix-vscode-extensions,
       spicetify-nix,
 
-      darwin,
+      nix-darwin,
       nix-homebrew,
       homebrew-core,
       homebrew-bundle,
@@ -87,7 +87,7 @@
       ...
     }:
     let
-      account = {
+      defaultAccount = {
         username = "svenh";
         fullName = "Sven Herrle";
       };
@@ -159,7 +159,7 @@
         });
       mkDarwinConfig =
         account: system:
-        (darwin.lib.darwinSystem {
+        (nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit inputs account; };
           modules = [
@@ -167,7 +167,7 @@
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
-                user = account.username; # overriden on host level
+                user = account.username;
                 enable = true;
                 taps = {
                   "homebrew/homebrew-core" = homebrew-core;
@@ -193,21 +193,18 @@
         nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
       nixosConfigurations =
-        # TODO
         (nixpkgs.lib.genAttrs linuxSystems (
-          system: mkNixosConfig account ./hosts/nixos/xsh-workstation-nix-01
+          system: mkNixosConfig defaultAccount ./hosts/nixos/xsh-workstation-nix-01
         ))
         # Host-specific configurations
         // {
-          xsh-workstation-nix-01 = mkNixosConfig account ./hosts/nixos/xsh-workstation-nix-01;
+          xsh-workstation-nix-01 = mkNixosConfig defaultAccount ./hosts/nixos/xsh-workstation-nix-01;
         };
 
-      darwinConfigurations =
-        (nixpkgs.lib.genAttrs darwinSystems (system: mkDarwinConfig account system))
-        # Named host configurations
-        // {
-          MB-HY34415F46 = mkDarwinConfig (account // { username = "sven.herrle"; }) "aarch64-darwin";
-        };
+      darwinConfigurations = {
+        # Host-specific configurations only
+        "MB-HY34415F46" = mkDarwinConfig (defaultAccount // { username = "sven.herrle"; }) "aarch64-darwin";
+      };
     };
 
 }

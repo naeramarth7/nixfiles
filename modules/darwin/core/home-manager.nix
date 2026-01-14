@@ -9,7 +9,6 @@
 
   users.users.${account.username} = {
     name = "${account.username}";
-    isNormalUser = true;
     home = "/Users/${account.username}";
     isHidden = false;
     shell = pkgs.zsh;
