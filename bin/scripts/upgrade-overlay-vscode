@@ -19,7 +19,7 @@ for cmd in curl jq openssl awk pv; do
 done
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." >/dev/null 2>&1 && pwd)"
-TEMPLATE="$ROOT_DIR/overlays/vscode.tmpl.nix"
+TEMPLATE="$ROOT_DIR/overlays/vscode.nix.tmpl"
 OVERLAY_FILE="$ROOT_DIR/overlays/vscode.nix"
 
 API_URL="https://update.code.visualstudio.com/api/releases/stable"
@@ -38,6 +38,17 @@ else
   fi
 
   printf '%b\n' "Latest version: ${COLOR_YELLOW}${requested_version}${RESET}"
+fi
+
+# Fetch rev (tag object SHA) — prefer SSH `git ls-remote` to avoid GitHub API limits.
+rev_candidate=""
+if [ -z "$rev_candidate" ]; then
+  rev_candidate=$(curl -fsS "https://api.github.com/repos/microsoft/vscode/git/ref/tags/${requested_version}" | jq -r '.object.sha // empty' || true)
+fi
+
+# Final fallback: use the version string itself
+if [ -z "$rev_candidate" ]; then
+  rev_candidate="$requested_version"
 fi
 
 # Read current version if overlay exists
@@ -78,18 +89,12 @@ trap 'rm -rf "$tmpdir"' EXIT
 systems=("x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" "armv7l-linux")
 plats=("linux-x64" "linux-arm64" "darwin" "darwin-arm64" "linux-armhf")
 
-# Fetch rev (tag object SHA) once from GitHub
-rev_candidate=$(curl -fsS "https://api.github.com/repos/microsoft/vscode/git/ref/tags/${requested_version}" | jq -r '.object.sha // empty' || true)
-if [ -z "$rev_candidate" ]; then
-  rev_candidate="$requested_version"
-fi
-
 # download and hash
 for i in "${!systems[@]}"; do
   sys=${systems[$i]}
   plat=${plats[$i]}
   url="https://update.code.visualstudio.com/${requested_version}/${plat}/stable"
-  out="$tmpdir/${sys}.pkg"
+  out="$tmpdir/${sys}"
   printf '%b\n' "Downloading for ${COLOR_CYAN}${sys}${RESET}: ${url} -> ${out}"
   size=$(curl -sI -L --fail "$url" | awk -F: '/Content-Length/ {gsub(/^[ \t]+/, "", $2); print $2}' | tr -d '\r') || true
   if [ -n "$size" ]; then
@@ -111,27 +116,25 @@ for i in "${!systems[@]}"; do
   hashval="sha256-${b64}"
   varname="HASH_${sys//-/_}"
   eval "$varname=\"$hashval\""
+  printf ' %b\n' "SHA-256: ${COLOR_YELLOW}${hashval}${RESET}"
 done
 
 printf '%b\n' "Using rev: ${COLOR_YELLOW}${rev_candidate}${RESET}"
 
-# render template -> overlay by replacing placeholders
-awk -v ver="$requested_version" -v rev="$rev_candidate" \
-    -v h_x86_64_linux="$HASH_x86_64_linux" \
-    -v h_aarch64_linux="$HASH_aarch64_linux" \
-    -v h_x86_64_darwin="$HASH_x86_64_darwin" \
-    -v h_aarch64_darwin="$HASH_aarch64_darwin" \
-    -v h_armv7l_linux="$HASH_armv7l_linux" \
-'{
-  gsub(/@@VERSION@@/, ver)
-  gsub(/@@REV@@/, rev)
-  gsub(/@@HASH_x86_64-linux@@/, h_x86_64_linux)
-  gsub(/@@HASH_aarch64-linux@@/, h_aarch64_linux)
-  gsub(/@@HASH_x86_64-darwin@@/, h_x86_64_darwin)
-  gsub(/@@HASH_aarch64-darwin@@/, h_aarch64_darwin)
-  gsub(/@@HASH_armv7l-linux@@/, h_armv7l_linux)
-  print
-}' "$TEMPLATE" > "$tmpdir/vscode.nix"
+# render template -> overlay by replacing placeholders (use sed for readability)
+escape_sed() { printf '%s' "$1" | sed -e 's/[\\&|]/\\&/g'; }
+
+tmp_out="$tmpdir/vscode.nix"
+cp "$TEMPLATE" "$tmp_out"
+
+sed -e "s|@@VERSION@@|$(escape_sed "$requested_version")|g" \
+    -e "s|@@REV@@|$(escape_sed "$rev_candidate")|g" \
+    -e "s|@@HASH_x86_64-linux@@|$(escape_sed "$HASH_x86_64_linux")|g" \
+    -e "s|@@HASH_aarch64-linux@@|$(escape_sed "$HASH_aarch64_linux")|g" \
+    -e "s|@@HASH_x86_64-darwin@@|$(escape_sed "$HASH_x86_64_darwin")|g" \
+    -e "s|@@HASH_aarch64-darwin@@|$(escape_sed "$HASH_aarch64_darwin")|g" \
+    -e "s|@@HASH_armv7l-linux@@|$(escape_sed "$HASH_armv7l_linux")|g" \
+    "$tmp_out" > "$tmpdir/vscode.nix.tmp" && mv "$tmpdir/vscode.nix.tmp" "$tmp_out"
 
 mv "$tmpdir/vscode.nix" "$OVERLAY_FILE"
 printf '%b\n' "${COLOR_GREEN}Wrote overlay: ${OVERLAY_FILE}${RESET}"

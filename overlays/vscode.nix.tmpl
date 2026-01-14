@@ -15,11 +15,11 @@ let
     .${system} or (throw "Unsupported system: ${system}");
   hash =
     {
-      x86_64-linux = "sha256-qaGeIN0Jxh7Br31n2d7CRVAE0PvTUSD+HSRYjBI/lHQ=";
-      aarch64-linux = "sha256-x/jWXwVheVQlAtg2VOWeDU3xR2DpnHChIT1SgVIRCK0=";
-      x86_64-darwin = "sha256-yTJtE5YWkV1VFFnMxPLJOJjFjc2JNwZgfCIkp4jPHjs=";
-      aarch64-darwin = "sha256-ZbpP5xiytB6NOinmVcqbAaLcwDQqJ6m/8pAtl+/ib2A=";
-      armv7l-linux = "sha256-oZ1vRGWBVSAuf+4qHTVzaH8XFGisijtDy2tL8bCoqUA=";
+      x86_64-linux = "@@HASH_x86_64-linux@@";
+      aarch64-linux = "@@HASH_aarch64-linux@@";
+      x86_64-darwin = "@@HASH_x86_64-darwin@@";
+      aarch64-darwin = "@@HASH_aarch64-darwin@@";
+      armv7l-linux = "@@HASH_armv7l-linux@@";
     }
     .${system} or (throw "No sha256 available for ${system}.");
 in
