@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" >/dev/null 2>&1 && pwd)"
+
+nix flake update --extra-experimental-features 'nix-command flakes'
+"$SCRIPT_DIR/scripts/upgrade-overlay-vscode"
+"$SCRIPT_DIR/update"

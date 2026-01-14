@@ -84,9 +84,11 @@
       homebrew-core,
       homebrew-bundle,
       homebrew-cask,
+
       ...
     }:
     let
+      customOverlays = import ./overlays;
       defaultAccount = {
         username = "svenh";
         fullName = "Sven Herrle";
@@ -133,7 +135,7 @@
         (
           { ... }:
           {
-            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ] ++ customOverlays;
           }
         )
       ];

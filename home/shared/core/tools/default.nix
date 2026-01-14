@@ -4,6 +4,7 @@
     bat
     curl
     p7zip
+    pv
     tealdeer
     unar
     wakeonlan

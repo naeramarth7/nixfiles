@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Allow passing a desired version instead of checking for the latest
+requested_version="${1:-}"
+
+# Colors
+COLOR_RED="\033[0;31m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_GREEN="\033[0;32m"
+COLOR_CYAN="\033[0;36m"
+RESET="\033[0m"
+
+for cmd in curl jq openssl awk pv; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    printf 'Required command "%s" not found.\n' "$cmd" >&2
+    exit 1
+  fi
+done
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." >/dev/null 2>&1 && pwd)"
+TEMPLATE="$ROOT_DIR/overlays/vscode.tmpl.nix"
+OVERLAY_FILE="$ROOT_DIR/overlays/vscode.nix"
+
+API_URL="https://update.code.visualstudio.com/api/releases/stable"
+
+if [ -n "$requested_version" ]; then
+  printf '%b\n' "Using requested version: ${COLOR_YELLOW}${requested_version}${RESET}"
+else
+  requested_version=$(curl -fsS "$API_URL" | jq -r '.[0]') || {
+    printf '%b\n' "${COLOR_RED}Failed to fetch latest version from ${API_URL}${RESET}" >&2
+    exit 1
+  }
+
+  if [ -z "$requested_version" ] || [ "$requested_version" = "null" ]; then
+    printf '%b\n' "${COLOR_RED}Could not determine latest VS Code version${RESET}" >&2
+    exit 1
+  fi
+
+  printf '%b\n' "Latest version: ${COLOR_YELLOW}${requested_version}${RESET}"
+fi
+
+# Read current version if overlay exists
+current_version=""
+if [ -f "$OVERLAY_FILE" ]; then
+  current_version=$(sed -n 's/.*version[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' "$OVERLAY_FILE" | head -n1 || true)
+fi
+
+if [ -n "$current_version" ] && [ "$current_version" = "$requested_version" ]; then
+  printf '%b\n' "${COLOR_GREEN}Overlay already at latest version: ${COLOR_YELLOW}${requested_version}${RESET}"
+  exit 0
+fi
+
+printf '%b\n' "Updating overlay: ${COLOR_YELLOW}${current_version:-<none>}${RESET} -> ${COLOR_YELLOW}${requested_version}${RESET}"
+
+# Check nixpkgs' vscode.version — if it already matches, write an empty overlay and exit (no override needed).
+if command -v nix >/dev/null 2>&1; then
+  nix_out=$(nix --extra-experimental-features 'nix-command flakes' eval --json nixpkgs#vscode.version 2>/dev/null || true)
+  if [ -n "$nix_out" ]; then
+    nixpkg_version=$(printf '%s' "$nix_out" | jq -r '.' 2>/dev/null || true)
+    if [ -n "$nixpkg_version" ] && [ "$nixpkg_version" = "$requested_version" ]; then
+      printf '%b\n' "${COLOR_GREEN}nixpkgs already provides vscode ${COLOR_YELLOW}${requested_version}${RESET} — writing empty overlay and exiting."
+      printf '%s\n' 'final: prev: { }' > "$OVERLAY_FILE"
+      exit 0
+    fi
+  fi
+fi
+
+if [ ! -f "$TEMPLATE" ]; then
+  printf 'Template not found: %s\n' "$TEMPLATE" >&2
+  exit 1
+fi
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+
+# systems and platform strings (must match placeholders in template)
+systems=("x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" "armv7l-linux")
+plats=("linux-x64" "linux-arm64" "darwin" "darwin-arm64" "linux-armhf")
+
+# Fetch rev (tag object SHA) once from GitHub
+rev_candidate=$(curl -fsS "https://api.github.com/repos/microsoft/vscode/git/ref/tags/${requested_version}" | jq -r '.object.sha // empty' || true)
+if [ -z "$rev_candidate" ]; then
+  rev_candidate="$requested_version"
+fi
+
+# download and hash
+for i in "${!systems[@]}"; do
+  sys=${systems[$i]}
+  plat=${plats[$i]}
+  url="https://update.code.visualstudio.com/${requested_version}/${plat}/stable"
+  out="$tmpdir/${sys}.pkg"
+  printf '%b\n' "Downloading for ${COLOR_CYAN}${sys}${RESET}: ${url} -> ${out}"
+  size=$(curl -sI -L --fail "$url" | awk -F: '/Content-Length/ {gsub(/^[ \t]+/, "", $2); print $2}' | tr -d '\r') || true
+  if [ -n "$size" ]; then
+    if ! curl -sSL --fail "$url" | pv -s "$size" > "$out"; then
+      printf '%b\n' "${COLOR_RED}Failed to download ${url}${RESET}" >&2
+      exit 1
+    fi
+  else
+    if ! curl -sSL --fail "$url" | pv > "$out"; then
+      printf '%b\n' "${COLOR_RED}Failed to download ${url}${RESET}" >&2
+      exit 1
+    fi
+  fi
+  if [ ! -s "$out" ]; then
+    printf '%b\n' "${COLOR_RED}Downloaded file is empty for ${sys}${RESET}" >&2
+    exit 1
+  fi
+  b64=$(openssl dgst -sha256 -binary "$out" | openssl base64 -A)
+  hashval="sha256-${b64}"
+  varname="HASH_${sys//-/_}"
+  eval "$varname=\"$hashval\""
+done
+
+printf '%b\n' "Using rev: ${COLOR_YELLOW}${rev_candidate}${RESET}"
+
+# render template -> overlay by replacing placeholders
+awk -v ver="$requested_version" -v rev="$rev_candidate" \
+    -v h_x86_64_linux="$HASH_x86_64_linux" \
+    -v h_aarch64_linux="$HASH_aarch64_linux" \
+    -v h_x86_64_darwin="$HASH_x86_64_darwin" \
+    -v h_aarch64_darwin="$HASH_aarch64_darwin" \
+    -v h_armv7l_linux="$HASH_armv7l_linux" \
+'{
+  gsub(/@@VERSION@@/, ver)
+  gsub(/@@REV@@/, rev)
+  gsub(/@@HASH_x86_64-linux@@/, h_x86_64_linux)
+  gsub(/@@HASH_aarch64-linux@@/, h_aarch64_linux)
+  gsub(/@@HASH_x86_64-darwin@@/, h_x86_64_darwin)
+  gsub(/@@HASH_aarch64-darwin@@/, h_aarch64_darwin)
+  gsub(/@@HASH_armv7l-linux@@/, h_armv7l_linux)
+  print
+}' "$TEMPLATE" > "$tmpdir/vscode.nix"
+
+mv "$tmpdir/vscode.nix" "$OVERLAY_FILE"
+printf '%b\n' "${COLOR_GREEN}Wrote overlay: ${OVERLAY_FILE}${RESET}"
