@@ -10,5 +10,8 @@ _: {
 
     # mounts
     ../../../modules/shared/on_demand/mount_xsh-nas-01.nix
+
+    # others
+    ../../../modules/nixos/on_demand/gaming
   ];
 }

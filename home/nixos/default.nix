@@ -9,6 +9,7 @@
   imports = [
     ../shared/core
 
+    ./gaming
     ./noctalia
     ./media
     ./messaging
