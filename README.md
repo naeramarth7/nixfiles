@@ -1,5 +1,17 @@
 # nixfiles
 
+## Structure
+
+```
+.
+├── apps/
+├── flake.nix
+├── home/
+├── hosts/
+├── modules/
+└── setup/
+```
+
 ## Manual steps
 
 ### noctalia-shell
