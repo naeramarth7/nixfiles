@@ -38,6 +38,7 @@ _: {
     "bettertouchtool"
     "cyberduck"
     "jordanbaird-ice"
+    "karabiner-elements"
     "keka"
     "krisp"
     "mqtt-explorer"
