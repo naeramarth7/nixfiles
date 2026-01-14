@@ -2,6 +2,8 @@
 {
   imports = [
     ./git
+    ./vscode.nix
+    ./wezterm.nix
   ];
 
   home.packages = with pkgs; [

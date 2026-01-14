@@ -129,19 +129,20 @@
         # "check-keys" = mkApp "check-keys" system;
         # "rollback" = mkApp "rollback" system;
       };
+      commonModules = [
+        (
+          { ... }:
+          {
+            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+          }
+        )
+      ];
       mkNixosConfig =
         account: hostPath:
         (nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs account; };
 
-          modules = [
-            (
-              { ... }:
-              {
-                nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
-              }
-            )
-
+          modules = commonModules ++ [
             ./hosts/nixos
             hostPath
 
@@ -162,7 +163,7 @@
         (nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit inputs account; };
-          modules = [
+          modules = commonModules ++ [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {

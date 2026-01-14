@@ -29,10 +29,6 @@ _: {
     "phoenix"
     "todoist-app"
 
-    # Development
-    "visual-studio-code"
-    "wezterm"
-
     # Social
     "vesktop"
     "whatsapp"

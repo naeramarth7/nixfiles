@@ -10,7 +10,6 @@
     ../shared/core
 
     ./noctalia
-    ./development
     ./media
     ./messaging
     ./tools
