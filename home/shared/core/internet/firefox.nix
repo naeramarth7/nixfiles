@@ -83,6 +83,11 @@
         };
 
         # not yet supported
+
+        "browser.taskbarTabs.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
         "sidebar.verticalTabs" = {
           Value = true;
         };

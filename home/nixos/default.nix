@@ -12,6 +12,7 @@
     ./noctalia
     ./development
     ./media
+    ./messaging
     ./tools
   ];
 
