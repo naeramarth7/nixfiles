@@ -4,7 +4,6 @@
     bat
     curl
     dig
-    p7zip
     pv
     tealdeer
     unar
