@@ -11,4 +11,6 @@
       Restart = "on-failure";
     };
   };
+
+  programs.xwayland.enable = true;
 }
