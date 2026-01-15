@@ -5,6 +5,7 @@
     ./internet
     ./tools
 
+    ./obsidian.nix
     ./syncthing.nix
   ];
 

@@ -25,7 +25,6 @@ _: {
     # Productivity
     "alfred"
     "iterm2"
-    "obsidian"
     "phoenix"
     "todoist-app"
 
