@@ -1,31 +1,30 @@
 { pkgs, inputs, ... }:
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     inputs.spicetify-nix.homeManagerModules.spicetify
   ];
 
-  programs.spicetify =
-    let
-      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-    in
-    {
-      enable = true;
+  programs.spicetify = {
+    enable = true;
+    wayland = true;
 
-      wayland = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      # adblockify
+      # hidePodcasts
+      # shuffle
+    ];
 
-      enabledExtensions = with spicePkgs.extensions; [
-        adblockify
-        hidePodcasts
-        shuffle
-      ];
+    enabledCustomApps = with spicePkgs.apps; [
+      marketplace
+      # newReleases
+    ];
 
-      enabledCustomApps = with spicePkgs.apps; [
-        marketplace
-        newReleases
-      ];
-
-      # theme = spicePkgs.themes.catppuccin;
-      # colorScheme = "mocha";
-    };
+    # theme applied by noctalia
+    theme = spicePkgs.themes.sleek;
+    colorScheme = "AyuDark";
+  };
 
 }
