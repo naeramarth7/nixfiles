@@ -4,6 +4,8 @@
     ./development
     ./internet
     ./tools
+
+    ./syncthing.nix
   ];
 
   home.packages = with pkgs; [
