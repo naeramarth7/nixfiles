@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+_: {
   services.syncthing = {
     enable = true;
     settings = {
@@ -16,8 +15,8 @@
       };
       folders = {
         "Obsidian" = {
-          id = "bvgew-qah6a";
-          path = "/Users/sven.herrle/Documents/Obsidian";
+          id = "rdyho-dgcog";
+          path = "~/Documents/Obsidian";
           devices = [ "xsh-nas-01" ];
         };
       };
