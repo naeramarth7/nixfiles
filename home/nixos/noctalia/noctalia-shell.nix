@@ -47,5 +47,9 @@
     mkdir -p ${config.xdg.configHome}/fuzzel/themes
     touch ${config.xdg.configHome}/fuzzel/themes/noctalia
     chmod 644 ${config.xdg.configHome}/fuzzel/themes/noctalia
+
+    mkdir -p ${config.home.homeDirectory}/.local/share/color-schemes
+    touch ${config.home.homeDirectory}/.local/share/color-schemes/noctalia.colors
+    chmod 644 ${config.home.homeDirectory}/.local/share/color-schemes/noctalia.colors
   '';
 }
