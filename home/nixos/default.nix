@@ -10,6 +10,7 @@
     ../shared/core
 
     ./environment
+    ./programs
 
     ./gaming
     ./noctalia

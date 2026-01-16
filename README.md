@@ -33,12 +33,15 @@ nix-repl> :l <nixpkgs>
 
 ## Credits
 
-- https://github.com/dustinlyons/nixos-config
-
+- [dustinlyons/nixos-config](https://github.com/dustinlyons/nixos-config)
 
 ## FAQ
 
-**Where to find `*.desktop` files to reference them?**
+### Where to find `*.desktop` files to reference them?
 
 - `/etc/profiles/per-user/$USER/share/applications/`
 - `/run/current-system/sw/share/applications/`
+
+### KDE / DOplhin file associations are not working
+
+- Run `kbuildsycoca6` manually
