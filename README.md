@@ -35,7 +35,7 @@ nix-repl> :l <nixpkgs>
 
 - [dustinlyons/nixos-config](https://github.com/dustinlyons/nixos-config)
 
-## FAQ
+## FAQ / Troubleshooting
 
 ### Where to find `*.desktop` files to reference them?
 
@@ -45,3 +45,13 @@ nix-repl> :l <nixpkgs>
 ### KDE / DOplhin file associations are not working
 
 - Run `kbuildsycoca6` manually
+
+### Bluetooth isnt't working
+
+A mix of [those  comments](https://old.reddit.com/r/archlinux/comments/zweejv/how_to_fix_error_bluetooth_service_was_skipped/lwlq8b5/?cache-bust=1768600578266) was helful on the B850M Riptide with a MT7925 onboard wifi/bluetooth chip.
+
+- Disable both devices in BIOS
+- Reboot
+- Power off, unplug, Press power button, wait
+- Enable both devices in BIOS
+- Bluetooth was functional

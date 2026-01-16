@@ -1,5 +1,11 @@
 { pkgs, ... }:
 {
+  system.fsPackages = with pkgs; [
+    usbutils
+    pciutils
+
+  ];
+
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
