@@ -1,10 +1,6 @@
-{ pkgs, ... }:
-{
+_: {
   imports = [
+    ./vesktop.nix
     ./whatsapp.nix
-  ];
-
-  home.packages = with pkgs; [
-    vesktop # discord client
   ];
 }
