@@ -9,6 +9,7 @@
     ./syncthing.nix
 
     ./thunderbird.nix
+    ./nushell
   ];
 
   home.packages = with pkgs; [

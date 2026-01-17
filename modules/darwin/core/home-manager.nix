@@ -1,17 +1,13 @@
 {
   account,
-  pkgs,
   config,
   ...
 }:
 {
-  programs.zsh.enable = true;
-
   users.users.${account.username} = {
     name = "${account.username}";
     home = "/Users/${account.username}";
     isHidden = false;
-    shell = pkgs.zsh;
   };
 
   homebrew = {

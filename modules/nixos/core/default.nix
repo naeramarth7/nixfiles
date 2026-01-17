@@ -1,5 +1,7 @@
 _: {
   imports = [
+    ../../shared/core
+
     ./environment.nix
     ./system
 

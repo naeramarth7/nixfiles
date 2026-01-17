@@ -2,6 +2,8 @@ _: {
   nixpkgs.config.allowUnfree = true;
 
   imports = [
+    ../../shared/core
+
     ./home-manager.nix
     ./homebrew.nix
   ];
