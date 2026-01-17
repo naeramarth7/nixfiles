@@ -6,9 +6,9 @@
     dig
     pv
     tealdeer
+    toybox
     unar
     wakeonlan
-    watch
     watchman
     wget
   ];
