@@ -12,6 +12,7 @@ _: {
     ../../../modules/shared/on_demand/mount_xsh-nas-01.nix
 
     # others
-    ../../../modules/nixos/on_demand/gaming
+    ../../../modules/nixos/on_demand/gaming.nix
+    (../../../modules/nixos/on_demand/openrgb.nix)
   ];
 }
