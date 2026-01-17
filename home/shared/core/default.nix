@@ -7,6 +7,8 @@
 
     ./obsidian.nix
     ./syncthing.nix
+
+    ./thunderbird.nix
   ];
 
   home.packages = with pkgs; [
