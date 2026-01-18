@@ -6,7 +6,6 @@
     dig
     pv
     tealdeer
-    toybox
     unar
     wakeonlan
     watchman

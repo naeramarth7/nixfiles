@@ -12,6 +12,7 @@
   ];
 
   home.packages = with pkgs; [
+    coreutils
     findutils
     moreutils
     openssh
