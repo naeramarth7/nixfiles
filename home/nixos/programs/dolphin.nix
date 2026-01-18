@@ -16,36 +16,9 @@
     kdePackages.qtimageformats
     icoutils
     libheif
-
-    # ### TESTING
-
-    # shared-mime-info
-    # xdg-utils
-    # desktop-file-utils
-
-    # # KDE runtime bits Dolphin needs
-    # # kdePackages.kservice
-    # kdePackages.kio
-    # kdePackages.kconfig
-    # kdePackages.kcoreaddons
   ];
 
   home.file.".local/share/kio/servicemenus/open-in-wezterm.desktop".source =
     ./dolphin/service-menu/open-in-dolphin.desktop;
-
-  ### TESTING
-
-  # # Enable XDG integration
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = [
-  #     pkgs.xdg-desktop-portal-gtk
-  #     pkgs.xdg-desktop-portal
-  #   ];
-  #   configPackages = [
-  #     pkgs.xdg-desktop-portal-gtk
-  #     pkgs.xdg-desktop-portal
-  #   ];
-  # };
 
 }

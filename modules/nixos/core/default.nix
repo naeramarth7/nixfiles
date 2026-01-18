@@ -2,8 +2,8 @@ _: {
   imports = [
     ../../shared/core
 
-    ./environment.nix
     ./system
+    ./kde.nix
 
     ./applications.nix
     ./bluetooth.nix
