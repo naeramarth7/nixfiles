@@ -5,11 +5,10 @@
     ./internet
     ./tools
 
+    ./nushell
     ./obsidian.nix
     ./syncthing.nix
-
     ./thunderbird.nix
-    ./nushell
   ];
 
   home.packages = with pkgs; [
