@@ -7,6 +7,7 @@ _: {
 
     ./applications.nix
     ./bluetooth.nix
+    ./keyboard.nix
     ./networking.nix
   ];
 }
