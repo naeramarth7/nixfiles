@@ -36,6 +36,7 @@ _: {
     "appcleaner"
     "bettertouchtool"
     "cyberduck"
+    "handbrake"
     "jordanbaird-ice"
     "karabiner-elements"
     "keka"
