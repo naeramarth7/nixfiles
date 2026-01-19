@@ -7,6 +7,8 @@
 
   programs.nushell = {
     enable = true;
+    # Use ~/.config/nushell on macOS as well
+    configDir = "${config.xdg.configHome}/nushell";
     extraConfig = ''
       source ./mod.nu
     '';
