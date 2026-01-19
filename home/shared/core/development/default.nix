@@ -3,7 +3,7 @@
   imports = [
     ./git
     ./vscode.nix
-    ./wezterm.nix
+    ./wezterm
   ];
 
   home.packages = with pkgs; [
