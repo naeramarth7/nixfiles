@@ -1,4 +1,11 @@
 { pkgs, ... }:
+let
+  defaultProg =
+    if pkgs.stdenv.isDarwin then
+      ''{ "/bin/zsh", "-lc", "${pkgs.nushell}/bin/nu" }''
+    else
+      ''{ "${pkgs.nushell}/bin/nu", "-l" }'';
+in
 {
   programs.wezterm = {
     enable = true;
@@ -10,7 +17,7 @@
       local config = wezterm.config_builder()
 
       -- Default shell
-      config.default_prog = { "${pkgs.nushell}/bin/nu", '-l' }
+      config.default_prog = ${defaultProg}
 
       -- For example, changing the initial geometry for new windows:
       config.initial_cols = 120
