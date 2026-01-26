@@ -1,6 +1,6 @@
 _: {
   imports = [
     ./fonts.nix
-    ./nushell
+    ./shell
   ];
 }

@@ -6,7 +6,7 @@
     ./tools
 
     ./nix.nix
-    ./nushell
+    ./shell
     ./obsidian.nix
     ./syncthing.nix
     ./thunderbird.nix

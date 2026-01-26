@@ -42,7 +42,6 @@ let
       redhat.vscode-yaml
       romantomjak.go-template
       tamasfe.even-better-toml
-      thenuprojectcontributors.vscode-nushell-lang
 
       # tools
       bierner.color-info

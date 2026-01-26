@@ -3,6 +3,5 @@ _: {
     ../../shared/core
 
     ./apps
-    ./environment
   ];
 }

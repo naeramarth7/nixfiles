@@ -1,6 +1,5 @@
-{ ... }:
-{
-  # gets automatically integrated into nushell
+{ ... }: {
+  # gets automatically integrated into shells without extra config
   programs.starship = {
     enable = true;
     settings = {
