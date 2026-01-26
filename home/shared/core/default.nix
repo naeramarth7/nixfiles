@@ -5,6 +5,7 @@
     ./internet
     ./tools
 
+    ./nix.nix
     ./nushell
     ./obsidian.nix
     ./syncthing.nix

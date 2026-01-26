@@ -166,6 +166,8 @@
           inherit system;
           specialArgs = { inherit inputs account; };
           modules = commonModules ++ [
+            ./hosts/darwin
+
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {
@@ -187,7 +189,6 @@
                 autoMigrate = true;
               };
             }
-            ./hosts/darwin
           ];
         });
     in
