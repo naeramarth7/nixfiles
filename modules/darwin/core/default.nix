@@ -4,6 +4,7 @@ _: {
   imports = [
     ../../shared/core
 
+    ./system.nix
     ./home-manager.nix
     ./homebrew.nix
   ];

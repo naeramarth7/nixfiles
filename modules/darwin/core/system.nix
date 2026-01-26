@@ -1,0 +1,11 @@
+_: {
+  system.stateVersion = 6;
+
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.orientation = "bottom";
+  system.defaults.dock.tilesize = 32;
+
+  # Properly display apps in mission control when using aerospace
+  # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
+  system.defaults.dock.expose-group-apps = true;
+}

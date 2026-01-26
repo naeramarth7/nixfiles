@@ -7,7 +7,6 @@
 
   system = {
     primaryUser = account.username;
-    stateVersion = 6;
   };
 
   environment.variables = {
