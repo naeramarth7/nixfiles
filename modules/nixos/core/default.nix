@@ -2,12 +2,12 @@ _: {
   imports = [
     ../../shared/core
 
-    ./system
-    ./kde.nix
-
     ./applications.nix
     ./bluetooth.nix
+    ./fonts.nix
+    ./kde.nix
     ./keyboard.nix
     ./networking.nix
+    ./system
   ];
 }

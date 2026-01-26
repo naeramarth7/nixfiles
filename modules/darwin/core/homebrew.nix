@@ -54,11 +54,5 @@ _: {
     "home-assistant"
     "moneymoney"
     "portfolioperformance"
-
-    # Fonts
-    "font-inter"
-    "font-roboto"
-    "font-roboto-flex"
-    "font-roboto-mono"
   ];
 }
