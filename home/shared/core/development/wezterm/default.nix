@@ -37,7 +37,7 @@
         top = 8,
         bottom = 8,
       }
-      config.window_decorations = 'NONE'
+      config.window_decorations = 'RESIZE'
 
       -- Finally, return the configuration to wezterm:
       return config
