@@ -4,11 +4,9 @@ _: {
   imports = [
     ../../shared/core
 
+    ./1password.nix
     ./system.nix
-    ./home-manager.nix
     ./homebrew.nix
+    ./users.nix
   ];
-
-  programs._1password.enable = true;
-  programs._1password-gui.enable = true;
 }

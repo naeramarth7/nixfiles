@@ -151,11 +151,12 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                extraSpecialArgs = { inherit inputs account; };
+
                 useGlobalPkgs = true;
                 useUserPackages = true;
 
                 users.${account.username} = import ./home/nixos;
-                extraSpecialArgs = { inherit inputs account; };
               };
             }
           ];
@@ -169,6 +170,23 @@
             ./hosts/darwin
 
             home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = { inherit inputs account; };
+
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                users.${account.username} = {
+                  imports = [
+                    ./home/darwin/core
+                    ./home/darwin/work
+                  ];
+                  home.stateVersion = "25.11";
+                };
+              };
+            }
+
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {

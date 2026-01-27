@@ -1,4 +1,19 @@
-_: {
+{ account, config, ... }: {
+  homebrew = {
+    enable = true;
+    # use taps from nix-homebrew module
+    taps = builtins.attrNames config.nix-homebrew.taps;
+    caskArgs = {
+      appdir = "/Users/${account.username}/Applications";
+    };
+    onActivation = {
+      cleanup = "uninstall";
+      # # Upgrade all outdated packages and casks.
+      # # Makes the build not idempotent anymore, but brew packages are not managed by nix anyway.
+      # upgrade = true;
+    };
+  };
+
   homebrew.brews = [
     # Tools
     "chezmoi" # dotfiles management. Might be completely replaced by nix later.
@@ -47,7 +62,6 @@ _: {
     "tunnelblick"
 
     # Media
-    "spotify"
     "vlc"
 
     # Misc
