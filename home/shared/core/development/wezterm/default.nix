@@ -17,11 +17,11 @@
       config.initial_rows = 28
 
       -- or, changing the font size and color scheme.
-      config.font_size = 10.0
+      config.font_size = 12.0
       config.color_scheme = 'ayu'
 
       -- Font
-      config.font = wezterm.font 'Roboto Mono'
+      config.font = wezterm.font 'RobotoMono Nerd Font'
       config.freetype_load_target = 'Light'
       config.use_resize_increments = true -- improves font rendering
 
