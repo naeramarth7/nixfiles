@@ -7,6 +7,7 @@
     ./internet
     ./obsidian.nix
     ./shell
+    ./spicetify.nix
     ./syncthing.nix
     ./thunderbird.nix
     ./tools

@@ -14,7 +14,6 @@
 
     ./gaming
     ./noctalia
-    ./media
     ./messaging
     ./tools
 
