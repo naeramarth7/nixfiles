@@ -8,4 +8,7 @@ _: {
   # Properly display apps in mission control when using aerospace
   # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
   system.defaults.dock.expose-group-apps = true;
+
+  # Hide menu bar in favor of sketchybar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = true;
 }
