@@ -17,6 +17,8 @@
     ./media
     ./messaging
     ./tools
+
+    ./hypnotix
   ];
 
   # This value determines the home Manager release that your
