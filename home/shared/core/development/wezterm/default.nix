@@ -26,7 +26,18 @@
       config.use_resize_increments = true -- improves font rendering
 
       -- Tabs
+      config.hide_tab_bar_if_only_one_tab = true
       config.use_fancy_tab_bar = false
+
+      -- Window
+      config.window_background_opacity = 0.9
+      config.window_padding = {
+        left = 8,
+        right = 8,
+        top = 8,
+        bottom = 8,
+      }
+      config.window_decorations = 'NONE'
 
       -- Finally, return the configuration to wezterm:
       return config

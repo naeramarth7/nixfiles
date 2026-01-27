@@ -1,15 +1,15 @@
 { pkgs, ... }:
 {
   imports = [
+    ./nix.nix
+
     ./development
     ./internet
-    ./tools
-
-    ./nix.nix
-    ./shell
     ./obsidian.nix
+    ./shell
     ./syncthing.nix
     ./thunderbird.nix
+    ./tools
   ];
 
   home.packages = with pkgs; [
