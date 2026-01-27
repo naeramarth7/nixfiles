@@ -1,18 +1,20 @@
 # https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265
 
 { pkgs, ... }:
+let
+in
 {
   home.packages = with pkgs; [
     # need to manually run pywalfox once after install
     pywalfox-native # sync noctalia theme with firefox
   ];
 
-  # This doesn't play nice with 1Password on macOS unless it's signed by apple.
-  # Let's add it anyways to be able to make use the policies.
-  # Though we actually prefer the homebrew version on macOS.
   programs.firefox = {
     enable = true;
-    languagePacks = [ "en-US" ];
+
+    # This doesn't play nice with 1Password on macOS unless it's signed by apple.
+    # We add it just for the config, but skip installing the package and use the brew version.
+    package = if pkgs.stdenv.isDarwin then null else pkgs.firefox;
 
     policies = {
 
