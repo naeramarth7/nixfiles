@@ -3,7 +3,7 @@ _: {
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.orientation = "bottom";
-  system.defaults.dock.tilesize = 32;
+  system.defaults.dock.tilesize = 24;
 
   # Properly display apps in mission control when using aerospace
   # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
