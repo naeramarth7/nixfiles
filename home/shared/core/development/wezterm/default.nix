@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -16,7 +17,7 @@
       config.initial_rows = 28
 
       -- or, changing the font size and color scheme.
-      config.font_size = 12
+      config.font_size = 10.0
       config.color_scheme = 'ayu'
 
       -- Font
