@@ -1,4 +1,5 @@
-{ account, config, ... }: {
+{ account, config, ... }:
+{
   homebrew = {
     enable = true;
     # use taps from nix-homebrew module
@@ -15,9 +16,6 @@
   };
 
   homebrew.brews = [
-    # Tools
-    "chezmoi" # dotfiles management. Might be completely replaced by nix later.
-
     # Development
     "cmctl" # cert manager cli
     {
