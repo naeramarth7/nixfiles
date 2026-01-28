@@ -3,6 +3,7 @@
   imports = [
     ./nix.nix
 
+    ./chezmoi.nix
     ./development
     ./internet
     ./obsidian.nix
