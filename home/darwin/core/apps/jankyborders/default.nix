@@ -1,5 +1,6 @@
-_: {
-  services.jankyborders = {
-    enable = true;
-  };
+{ account, pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    jankyborders
+  ];
 }
