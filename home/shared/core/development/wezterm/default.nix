@@ -1,46 +1,5 @@
-{ pkgs, ... }:
-{
+_: {
   programs.wezterm = {
     enable = true;
-    extraConfig = ''
-      -- Pull in the wezterm API
-      local wezterm = require 'wezterm'
-
-      -- This will hold the configuration.
-      local config = wezterm.config_builder()
-
-      -- Default shell
-      config.default_prog = { '/run/current-system/sw/bin/zsh', '-l' }
-
-      -- For example, changing the initial geometry for new windows:
-      config.initial_cols = 120
-      config.initial_rows = 28
-
-      -- or, changing the font size and color scheme.
-      config.font_size = 12.0
-      config.color_scheme = 'ayu'
-
-      -- Font
-      config.font = wezterm.font 'RobotoMono Nerd Font'
-      config.freetype_load_target = 'Light'
-      config.use_resize_increments = true -- improves font rendering
-
-      -- Tabs
-      config.hide_tab_bar_if_only_one_tab = true
-      config.use_fancy_tab_bar = false
-
-      -- Window
-      config.window_background_opacity = 0.9
-      config.window_padding = {
-        left = 8,
-        right = 8,
-        top = 8,
-        bottom = 8,
-      }
-      config.window_decorations = 'RESIZE'
-
-      -- Finally, return the configuration to wezterm:
-      return config
-    '';
   };
 }
