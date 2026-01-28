@@ -6,7 +6,7 @@ _: {
   homebrew.brews = [
     # Development
     "azure-cli"
-    "cocoapods"
+    # "cocoapods"
     "dotnet"
   ];
 }
