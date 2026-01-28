@@ -2,6 +2,6 @@ _: {
   imports = [
     ../../shared/core
 
-    ./apps
+    ./packages
   ];
 }
