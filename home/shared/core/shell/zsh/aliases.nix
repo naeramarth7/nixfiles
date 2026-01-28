@@ -1,5 +1,7 @@
 _: {
   programs.zsh.shellAliases = {
+    l = "ls -l";
+    ll = "ls -la";
     g = "git";
     ls = "ls --color=auto -h";
     reload = "exec zsh";
