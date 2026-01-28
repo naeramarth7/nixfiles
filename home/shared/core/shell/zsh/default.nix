@@ -1,11 +1,8 @@
 { lib, ... }:
 {
-  imports = [
-    ./aliases.nix
-  ];
-
   programs.zsh = {
     enable = true;
+    envExtra = "";
     initContent =
       let
         zshEarlyInit = lib.mkOrder 500 "";
@@ -13,7 +10,9 @@
           # Available completion styles: gremlin, ohmy, prez, zshzoo
           zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
         '';
-        zshConfig = lib.mkOrder 1000 "";
+        zshConfig = lib.mkOrder 1000 ''
+          source $HOME/.zsh/.zshrc
+        '';
         zshAfter = lib.mkOrder 1500 ''
           set -o emacs
         '';

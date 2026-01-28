@@ -2,6 +2,12 @@
 {
   programs.git = {
     enable = true;
+    settings = {
+      include = {
+        # via dotfiles
+        path = "~/.config/git/config.main";
+      };
+    };
   };
 
   home.packages = [

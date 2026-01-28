@@ -15,7 +15,6 @@
     ./gaming
     ./noctalia
     ./messaging
-    ./tools
 
     ./hypnotix
   ];
