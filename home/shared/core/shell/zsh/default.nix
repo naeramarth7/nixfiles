@@ -3,18 +3,20 @@
   programs.zsh = {
     enable = true;
     envExtra = "";
+    completionInit = ""; # done manually to ensure plugins are loaded first
     initContent =
       let
-        zshEarlyInit = lib.mkOrder 500 "";
+        zshEarlyInit = lib.mkOrder 500 ''
+          [ -f "$HOME/.zsh/0500-zsh.src" ] && source $HOME/.zsh/0500-zsh.src
+        '';
         zshBeforeCompInit = lib.mkOrder 550 ''
-          # Available completion styles: gremlin, ohmy, prez, zshzoo
-          zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
+          [ -f "$HOME/.zsh/0550-zsh.src" ] && source $HOME/.zsh/0550-zsh.src
         '';
         zshConfig = lib.mkOrder 1000 ''
-          source $HOME/.zsh/.zshrc
+          [ -f "$HOME/.zsh/1000-zsh.src" ] && source $HOME/.zsh/1000-zsh.src
         '';
         zshAfter = lib.mkOrder 1500 ''
-          set -o emacs
+          [ -f "$HOME/.zsh/1500-zsh.src" ] && source $HOME/.zsh/1500-zsh.src
         '';
       in
       lib.mkMerge [
@@ -31,7 +33,7 @@
       "romkatv/zsh-bench kind:path" # zsh benchmarking tool
 
       # set up Zsh completions with plugins
-      "mattmc3/ez-compinit" # also needs init in zshBeforeCompInit
+      "Aloxaf/fzf-tab"
       "zsh-users/zsh-completions kind:fpath path:src"
 
       # history
