@@ -6,6 +6,7 @@
     ./chezmoi.nix
     ./development
     ./internet
+    ./neovim.nix
     ./obsidian.nix
     ./shell
     ./spicetify.nix
