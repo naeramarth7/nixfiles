@@ -1,5 +1,5 @@
 _: {
   imports = [
-    ./kde-qt.nix
+    ./gtk.nix
   ];
 }
