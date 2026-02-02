@@ -20,6 +20,7 @@
     coreutils
     findutils
     moreutils
+    unixtools.watch
     openssh
   ];
 }
