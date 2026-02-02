@@ -3,6 +3,7 @@
   imports = [
     ./nix.nix
 
+    ./android-tools
     ./chezmoi.nix
     ./development
     ./internet
