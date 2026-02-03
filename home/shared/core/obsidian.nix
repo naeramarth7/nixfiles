@@ -5,7 +5,7 @@
     mkdir -p ${config.xdg.configHome}/obsidian
   '';
 
-  # vaults are sync via syncthing
+  # vaults are synced via syncthing
   programs.obsidian = {
     enable = true;
   };
