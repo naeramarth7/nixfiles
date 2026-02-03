@@ -15,12 +15,6 @@
     };
   };
 
-  homebrew.brews = [
-    # Development
-    "cmctl" # cert manager cli
-    "skhd" # hotkey daemon
-  ];
-
   homebrew.casks = [
     # Internet
     # This is the actual version used on macOS instead of the nixpkg one.
@@ -29,8 +23,6 @@
 
     # Productivity
     "alfred"
-    "iterm2"
-    "phoenix"
     "todoist-app"
 
     # Social
@@ -42,7 +34,6 @@
     "bettertouchtool"
     "cyberduck"
     "handbrake"
-    "jordanbaird-ice"
     "karabiner-elements"
     "keka"
     "krisp"
