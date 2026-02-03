@@ -9,9 +9,9 @@
     };
     onActivation = {
       cleanup = "uninstall";
-      # # Upgrade all outdated packages and casks.
-      # # Makes the build not idempotent anymore, but brew packages are not managed by nix anyway.
-      # upgrade = true;
+      # Upgrade all outdated packages and casks.
+      # Makes the build not idempotent anymore, but brew packages are not managed by nix anyway.
+      upgrade = true;
     };
   };
 
