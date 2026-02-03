@@ -13,7 +13,6 @@ in
 {
   home.packages = with pkgs; [
     image-roll
-    nautilus
   ];
 
   xdg.mimeApps.enable = true;
