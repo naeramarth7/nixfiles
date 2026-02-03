@@ -18,14 +18,6 @@
   homebrew.brews = [
     # Development
     "cmctl" # cert manager cli
-    {
-      # container runtimes on macOS
-      name = "colima";
-      start_service = true;
-      restart_service = "changed";
-    }
-    "docker"
-    "docker-compose"
     "skhd" # hotkey daemon
   ];
 
