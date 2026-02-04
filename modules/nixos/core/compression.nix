@@ -1,11 +1,9 @@
 { pkgs, ... }:
 {
-  system.packages = with pkgs; [
-    # compression tools
+  environment.systemPackages = with pkgs; [
     bzip2
     gnutar
     gzip
-    lha
     p7zip
     rar
     unrar
