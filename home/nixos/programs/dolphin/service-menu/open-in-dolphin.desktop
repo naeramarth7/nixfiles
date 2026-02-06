@@ -3,9 +3,9 @@ Type=Service
 ServiceTypes=KonqPopupMenu/Plugin
 MimeType=inode/directory;
 X-KDE-Priority=TopLevel
-Actions=openwezterm
+Actions=open-ghostty
 
-[Desktop Action openwezterm]
-Name=Open In WezTerm
-Exec=wezterm start --cwd %u
-#Icon=org.wezfurlong.wezterm
+[Desktop Action open-ghostty]
+Name=Open In Ghostty
+Exec=ghostty --working-directory="%u"
+Icon=com.mitchellh.ghostty

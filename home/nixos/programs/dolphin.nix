@@ -18,7 +18,7 @@
     libheif
   ];
 
-  home.file.".local/share/kio/servicemenus/open-in-wezterm.desktop".source =
+  home.file.".local/share/kio/servicemenus/open-in-ghostty.desktop".source =
     ./dolphin/service-menu/open-in-dolphin.desktop;
 
 }

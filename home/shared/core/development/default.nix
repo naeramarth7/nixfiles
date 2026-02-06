@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
+    ./ghostty
     ./git
     ./vscode.nix
-    ./wezterm
   ];
 
   home.packages = with pkgs; [
