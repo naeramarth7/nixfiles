@@ -6,6 +6,7 @@ _: {
     ./bluetooth.nix
     ./compression.nix
     ./fonts.nix
+    ./kdeconnect
     ./kde.nix
     ./keyboard.nix
     ./networking.nix
