@@ -14,6 +14,7 @@
     ./syncthing.nix
     ./thunderbird.nix
     ./tools
+    ./vlc
   ];
 
   home.packages = with pkgs; [

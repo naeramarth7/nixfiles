@@ -42,9 +42,6 @@
     "shottr"
     "tunnelblick"
 
-    # Media
-    "vlc"
-
     # Misc
     "home-assistant"
     "moneymoney"
