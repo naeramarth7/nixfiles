@@ -12,6 +12,9 @@ _: {
         "svenh-iphone13-mini" = {
           id = "Q4UEFWI-AEJCMOD-G5ECQZN-UNY6TFW-6GZFRQC-VW36Z5Z-PGFTRYD-FKDNPQ7";
         };
+        "svenh-pixel-10-pro" = {
+          id = "S5XSQJJ-45DDZEW-VZMXWVQ-RSPWDLS-RN6G2C6-MPW3WFO-F7CPJJ5-QXE3SQU";
+        };
       };
       folders = {
         "Obsidian" = {
