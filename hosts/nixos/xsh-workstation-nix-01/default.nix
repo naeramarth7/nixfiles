@@ -13,6 +13,6 @@ _: {
 
     # others
     ../../../modules/nixos/on_demand/gaming.nix
-    (../../../modules/nixos/on_demand/openrgb.nix)
+    ../../../modules/nixos/on_demand/openrgb.nix
   ];
 }

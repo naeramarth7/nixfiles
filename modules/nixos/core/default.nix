@@ -5,7 +5,7 @@ _: {
     ./applications.nix
     ./bluetooth.nix
     ./compression.nix
-    ./docker.nix
+    ./podman.nix
     ./fonts.nix
     ./kdeconnect
     ./kde.nix
