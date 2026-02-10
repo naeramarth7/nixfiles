@@ -3,7 +3,7 @@ _: {
     ./authentication.nix
     ./display.nix
     ./firewall.nix
-    ./niri.nix
+    ./hyprland.nix
   ];
 
   services.dbus.enable = true;
