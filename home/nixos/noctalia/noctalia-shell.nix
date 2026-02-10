@@ -17,6 +17,8 @@
 
   home.packages = with pkgs; [
     glib # "gsettings" needed by noctalia to apply "gtk-1" themes
+
+    cliphist # used by clipper plugin
   ];
 
   # noctalia copies files from store with 444 permissions and

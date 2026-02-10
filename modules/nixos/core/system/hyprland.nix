@@ -5,8 +5,6 @@
   environment.systemPackages = with pkgs; [
     xwayland-satellite
 
-    hyprlauncher
-
     # TODO
     mako
     swayidle
