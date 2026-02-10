@@ -1,4 +1,8 @@
-{ account, pkgs, ... }:
+{
+  account,
+  pkgs,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     gnome-keyring
@@ -8,7 +12,6 @@
 
   services.dbus.packages = [ pkgs.gnome-keyring ];
 
-  # login
   services.displayManager.gdm = {
     enable = true;
     wayland = true;

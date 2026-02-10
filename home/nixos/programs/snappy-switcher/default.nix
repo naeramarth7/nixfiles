@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 {
   home.packages = [
-    inputs.snappy-switcher.packages.${pkgs.system}.default
+    inputs.snappy-switcher.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
