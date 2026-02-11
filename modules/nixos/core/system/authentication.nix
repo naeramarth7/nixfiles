@@ -5,53 +5,33 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    gnome-keyring
     libsecret
-    seahorse
+    kdePackages.kwallet
+    kdePackages.kwalletmanager
   ];
 
-  services.dbus.packages = [ pkgs.gnome-keyring ];
+  # Ensure the KDE wallet daemon is available on DBus
+  services.dbus.packages = [ pkgs.kdePackages.kwallet ];
 
-  services.displayManager.gdm = {
+  # Use SDDM as the display manager (KDE-friendly)
+  services.displayManager.sddm = {
     enable = true;
-    wayland = true;
+    wayland.enable = true;
 
     settings = {
-      daemon = {
-        AutomaticLoginEnable = "True";
-        AutomaticLogin = "${account.username}";
+      Autologin = {
+        Session = "hyprland-uwsm.desktop";
+        User = "${account.username}";
       };
     };
   };
 
-  # gnome-keyring service
-  services.gnome.gnome-keyring.enable = true;
-
-  # allow auto-unlock of gnome-keyring (requires password match)
-  security.pam.services = {
-    login.enableGnomeKeyring = true;
-    gdm.enableGnomeKeyring = true;
-  };
+  # Allow auto-unlock of KDE Wallet via PAM (requires matching login password)
+  security.pam.services.login.kwallet.enable = true;
+  security.pam.services.sddm.kwallet.enable = true;
 
   # Framework to let applications request elevated permissions
   security.polkit.enable = true;
-
-  systemd = {
-    # Allow apps to request authentication via system authentication service (gnome-keyring)
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
 
   # polkitPolicyOwners does not work via home manager, so this is added as on system level
   programs._1password.enable = true;

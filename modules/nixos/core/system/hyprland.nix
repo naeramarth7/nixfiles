@@ -2,8 +2,11 @@
 {
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
+  programs.hyprland.xwayland.enable = true;
 
   environment.systemPackages = with pkgs; [
+    hyprpolkitagent
+
     xwayland-satellite
 
     # TODO
