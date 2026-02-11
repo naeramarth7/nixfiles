@@ -10,6 +10,7 @@
     ./neovim.nix
     ./obsidian.nix
     ./shell
+    ./sops
     ./spicetify.nix
     ./syncthing.nix
     ./thunderbird.nix
