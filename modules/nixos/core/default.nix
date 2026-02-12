@@ -4,6 +4,7 @@ _: {
 
     ./applications.nix
     ./bluetooth.nix
+    ./cachix.nix
     ./compression.nix
     ./podman.nix
     ./fonts.nix
