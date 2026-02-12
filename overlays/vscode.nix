@@ -1,7 +1,7 @@
 final: prev:
 let
   inherit (prev.stdenv.hostPlatform) system;
-  version = "1.108.2";
+  version = "1.109.2";
 
   archive_fmt = if prev.stdenv.hostPlatform.isDarwin then "zip" else "tar.gz";
   plat =
@@ -15,18 +15,18 @@ let
     .${system} or (throw "Unsupported system: ${system}");
   hash =
     {
-      x86_64-linux = "sha256-RqBae6s6y2XnXqtKbrKkMRwALKLfNE7mBFwOwwomG10=";
-      aarch64-linux = "sha256-8WigXl83hXEA7qsG6dOYKVSVISRDDpqJyv7L+9ks40Q=";
-      x86_64-darwin = "sha256-3N7xZIJsgQPX6izaH8ZoXy3SLcbXCNwJvE8ahFwVfF8=";
-      aarch64-darwin = "sha256-ZJ0QKqkFQYz3V7TEalM3sFJnqYnKBgQVqPXdsi2c+80=";
-      armv7l-linux = "sha256-m78hRkaI1nlqdeeP3t0HiNCUzNneMXxyenC8RmtuC68=";
+      x86_64-linux = "sha256-ST5i8gvNtAaBbmcpcg9GJipr8e5d0A0qbdG1P9QViek=";
+      aarch64-linux = "sha256-7plpHWoi8eYDKQZVV3OCXZJUk8j173M1xpRgTOTsPZ0=";
+      x86_64-darwin = "sha256-BRGXLasiHZSKsijq02bCa2RbaBc7iC1ZtLe29u4KTH0=";
+      aarch64-darwin = "sha256-RgfhGjVFmaIAAotTYNPUDrJZ8qj8e4yR9bVfal/Hl6o=";
+      armv7l-linux = "sha256-Zzz4HsmiWcKiBRE19pGll8BRQy26wbmpuYSi89PDoBo=";
     }
     .${system} or (throw "No sha256 available for ${system}.");
 in
 {
   vscode = prev.vscode.overrideAttrs (old: {
     inherit version;
-    rev = "c9d77990917f3102ada88be140d28b038d1dd7c7";
+    rev = "591199df409fbf59b4b52d5ad4ee0470152a9b31";
 
     src = prev.fetchurl {
       name = "VSCode_${version}_${plat}.${archive_fmt}";
