@@ -1,6 +1,7 @@
 _: {
   imports = [
-    ./authentication.nix
+    ./gdm.nix
+    ./gnome-keyring.nix
     ./display.nix
     ./firewall.nix
     ./hyprland.nix
