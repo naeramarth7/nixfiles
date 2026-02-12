@@ -1,6 +1,8 @@
 {
   description = "xsh NixOS flake";
 
+  nixConfig.extra-experimental-features = "nix-command flakes";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
