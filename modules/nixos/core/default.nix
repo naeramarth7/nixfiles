@@ -13,5 +13,6 @@ _: {
     ./keyboard.nix
     ./networking.nix
     ./system
+    ./openssl
   ];
 }
