@@ -34,6 +34,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Limit number of boot entries
+  boot.loader.systemd-boot.configurationLimit = 25;
+
   # Popuplate keyring with luks password
   boot.initrd.systemd.enable = true;
 
