@@ -95,7 +95,7 @@
       ...
     }:
     let
-      customOverlays = [ ]; # import ./overlays;
+      customOverlays = import ./overlays;
       defaultAccount = {
         username = "svenh";
         fullName = "Sven Herrle";
