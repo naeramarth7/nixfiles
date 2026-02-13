@@ -61,9 +61,7 @@ let
       vincaslt.highlight-matching-tag
       wayou.vscode-todo-highlight
 
-      # Versions from nix-vscode-extensions expect insider builds
-      # github.copilot
-      # github.copilot-chat
+      anthropic.claude-code
     ];
     linux = with pkgs.vscode-marketplace; [
 

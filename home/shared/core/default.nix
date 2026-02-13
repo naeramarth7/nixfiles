@@ -5,6 +5,7 @@
 
     ./android-tools
     ./chezmoi.nix
+    ./claude-code
     ./development
     ./internet
     ./neovim.nix
