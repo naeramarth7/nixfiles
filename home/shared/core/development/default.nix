@@ -3,6 +3,7 @@
   imports = [
     ./ghostty
     ./git
+    ./k9s
     ./vscode.nix
   ];
 
@@ -15,7 +16,6 @@
     htop
     jq
     k3sup
-    k9s
     # kubeconform
     kubectl
     kubectx

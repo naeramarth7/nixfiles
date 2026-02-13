@@ -1,5 +1,9 @@
 { lib, ... }:
 {
+  imports = [
+    ./vivid.nix
+  ];
+
   programs.zsh = {
     enable = true;
     envExtra = "";
