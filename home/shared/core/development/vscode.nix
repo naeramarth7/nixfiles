@@ -62,6 +62,10 @@ let
       wayou.vscode-todo-highlight
 
       anthropic.claude-code
+
+      # themes
+      teabyii.ayu
+
     ];
     linux = with pkgs.vscode-marketplace; [
 
@@ -69,9 +73,6 @@ let
     darwin = with pkgs.vscode-marketplace; [
       # tools
       dnicolson.binary-plist
-
-      # themes
-      teabyii.ayu
     ];
   };
 in
