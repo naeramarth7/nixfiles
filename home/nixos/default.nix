@@ -16,6 +16,9 @@
     ./messaging
     ./noctalia
     ./programs
+    ./noctalia
+    ./programs
+    ./udisks2
   ];
 
   # This value determines the home Manager release that your

@@ -14,5 +14,6 @@ _: {
     ./networking.nix
     ./system
     ./openssl
+    ./udisks
   ];
 }
