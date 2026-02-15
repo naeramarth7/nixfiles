@@ -22,7 +22,6 @@
     kubelogin
     kubernetes-helm
     # kustomize
-    mise
     neofetch
     nixfmt # nix formatter
     nixd # nix language server

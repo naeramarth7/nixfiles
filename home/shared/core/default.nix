@@ -8,6 +8,7 @@
     ./claude-code
     ./development
     ./internet
+    ./mise
     ./neovim.nix
     ./obsidian.nix
     ./shell
