@@ -17,6 +17,7 @@
     ./syncthing.nix
     ./thunderbird.nix
     ./tools
+    ./victoriametrics
     ./vlc
   ];
 
