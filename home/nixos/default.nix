@@ -9,14 +9,13 @@
   imports = [
     ../shared/core
 
+    ./android-tools
     ./environment
-    ./programs
-
     ./gaming
-    ./noctalia
-    ./messaging
-
     ./hypnotix
+    ./messaging
+    ./noctalia
+    ./programs
   ];
 
   # This value determines the home Manager release that your

@@ -13,16 +13,16 @@ if [[ "$FLAG" != "switch" ]]; then
 fi
 
 HOST=`scutil --get LocalHostName`
-FLAKE_TARGET="darwinConfigurations.${HOSTNAME}.system"
+FLAKE_TARGET="darwinConfigurations.${HOST}.system"
 
 export NIXPKGS_ALLOW_UNFREE=1
 
 echo -e "${YELLOW}Starting build ($FLAG) for named host: $HOST${NC}"
-nix --extra-experimental-features 'nix-command flakes' build .#$FLAKE_TARGET $@
+nix --extra-experimental-features 'nix-command flakes' build .#$FLAKE_TARGET
 
 if [[ "$FLAG" == "switch" ]]; then
   echo "${YELLOW}Switching to new generation...${NC}"
-  sudo ./result/sw/bin/darwin-rebuild $FLAG --flake .#${HOSTNAME}
+  sudo ./result/sw/bin/darwin-rebuild $FLAG --flake .#${HOST}
   echo -e "${GREEN}Switch to new generation complete!${NC}"
 fi
 
