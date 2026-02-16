@@ -1,6 +1,5 @@
 {
   account,
-  config,
   ...
 }:
 {

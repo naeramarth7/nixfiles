@@ -4,7 +4,7 @@ _: {
   imports = [
     ../../shared/core
 
-    ./1password.nix
+    # ./1password.nix
     ./system.nix
     ./homebrew.nix
     ./users.nix
