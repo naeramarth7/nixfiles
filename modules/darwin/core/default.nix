@@ -5,9 +5,9 @@ _: {
     ../../shared/core
 
     ./1password.nix
-    ./system.nix
     ./homebrew.nix
+    ./macos
+    ./system.nix
     ./users.nix
-    ./ui
   ];
 }
