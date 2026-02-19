@@ -62,15 +62,15 @@
           Status = "locked";
         };
         "browser.search.suggest.enabled" = {
-          Value = false;
+          Value = true;
           Status = "locked";
         };
         "browser.search.suggest.enabled.private" = {
-          Value = false;
+          Value = true;
           Status = "locked";
         };
         "browser.urlbar.suggest.searches" = {
-          Value = false;
+          Value = true;
           Status = "locked";
         };
         "browser.urlbar.showSearchSuggestionsFirst" = {
