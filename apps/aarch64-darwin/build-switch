@@ -5,7 +5,7 @@ YELLOW='\033[1;33m'
 RED='\033[1;31m'
 NC='\033[0m'
 
-FLAG="${1:-switch}"
+FLAG="switch"
 
 if [[ "$FLAG" != "switch" ]]; then
   echo -e "${RED}Supported flags: 'switch'${NC}"
