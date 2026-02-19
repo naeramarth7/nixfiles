@@ -12,7 +12,7 @@
     lutris
     mangohud
     winetricks
-    wineWowPackages.stable
+    wineWow64Packages.stable
   ];
 
   hardware.graphics = {
