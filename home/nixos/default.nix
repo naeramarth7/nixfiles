@@ -15,6 +15,7 @@
     ./hypnotix
     ./messaging
     ./noctalia
+    ./pointer
     ./programs
     ./noctalia
     ./programs
