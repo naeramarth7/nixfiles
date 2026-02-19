@@ -8,5 +8,6 @@ _: {
     ./system.nix
     ./homebrew.nix
     ./users.nix
+    ./ui
   ];
 }
