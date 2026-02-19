@@ -38,7 +38,6 @@
     "keka"
     "krisp"
     "mqtt-explorer"
-    "scroll-reverser"
     "shottr"
     "tunnelblick"
 
