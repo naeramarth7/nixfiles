@@ -40,8 +40,12 @@
   # Popuplate keyring with luks password
   boot.initrd.systemd.enable = true;
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # # Use latest kernel.
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Use 6.18 kernel due to issues with nvidia drivers on 6.19
+  # INFO: https://github.com/NixOS/nixpkgs/issues/489947.
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
