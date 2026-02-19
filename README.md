@@ -1,7 +1,7 @@
 # nixfiles
 
 Separation of concern:  
-See [dotfiles](https://github.com/naeramarth7/nixfiles) for software configurations.
+See [dotfiles](https://github.com/naeramarth7/dotfiles) for software configurations.
 
 ## Structure
 
