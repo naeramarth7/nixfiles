@@ -233,6 +233,7 @@
       darwinConfigurations = {
         # Host-specific configurations only
         "MB-HY34415F46" = mkDarwinConfig (defaultAccount // { username = "sven.herrle"; }) "aarch64-darwin";
+        "MB-K77H417Q2L" = mkDarwinConfig (defaultAccount // { username = "sven.herrle"; }) "aarch64-darwin";
       };
     };
 

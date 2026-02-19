@@ -1,5 +1,8 @@
 # nixfiles
 
+Separation of concern:  
+See [dotfiles](https://github.com/naeramarth7/nixfiles) for software configurations.
+
 ## Structure
 
 ```
@@ -10,6 +13,24 @@
 ├── hosts/
 ├── modules/
 └── setup/
+```
+
+## Setup
+
+Prerequisites
+  - git
+  - nix
+  - 1Password
+
+### macOS
+
+```sh
+# clone repos
+git clone https://github.com/ ~/.nixos
+
+# install nix
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
+exec zsh # or open a new terminal
 ```
 
 ## Manual steps
