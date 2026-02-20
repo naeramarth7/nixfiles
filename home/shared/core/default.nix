@@ -14,6 +14,7 @@
     ./shell
     ./sops
     ./spicetify.nix
+    ./ssh
     ./syncthing.nix
     ./thunderbird.nix
     ./tools
@@ -25,7 +26,6 @@
     coreutils
     findutils
     moreutils
-    openssh
     rsync
     unixtools.watch
   ];
