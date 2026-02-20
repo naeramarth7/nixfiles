@@ -4,10 +4,8 @@ _: {
   imports = [
     ../../shared/core
 
-    ./1password.nix
     ./homebrew.nix
-    ./macos
-    ./system.nix
-    ./users.nix
+    ./programs
+    ./system
   ];
 }

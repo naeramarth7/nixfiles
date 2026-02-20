@@ -43,7 +43,6 @@
 
     # Misc
     "home-assistant"
-    "moneymoney"
     "portfolioperformance"
   ];
 }
