@@ -15,7 +15,7 @@
     ./sops
     ./spicetify.nix
     ./ssh
-    ./syncthing.nix
+    ./services
     ./thunderbird.nix
     ./tools
     ./victoriametrics

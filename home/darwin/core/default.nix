@@ -3,5 +3,6 @@ _: {
     ../../shared/core
 
     ./packages
+    ./services
   ];
 }
