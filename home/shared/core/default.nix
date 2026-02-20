@@ -25,7 +25,8 @@
     coreutils
     findutils
     moreutils
-    unixtools.watch
     openssh
+    rsync
+    unixtools.watch
   ];
 }
