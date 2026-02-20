@@ -5,7 +5,7 @@ _: {
     ../../shared/core
 
     ./homebrew.nix
-    ./programs
+    ./packages
     ./system
   ];
 }
