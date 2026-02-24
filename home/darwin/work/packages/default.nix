@@ -4,5 +4,6 @@ _: {
     ./cocoapods.nix
     ./postman.nix
     ./vault.nix
+    ./xcodes.nix
   ];
 }
