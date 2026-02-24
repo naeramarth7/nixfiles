@@ -25,8 +25,15 @@ let
       yzhang.markdown-all-in-one
 
       # dart / flutter
-      dart-code.dart-code
-      dart-code.flutter
+      # Override vscodeExtUniqueId to include version suffix.
+      # Flutter's `flutter doctor` crashes with a RangeError when extension
+      # directories don't have a `-version` suffix in their name.
+      (dart-code.dart-code.overrideAttrs (old: {
+        vscodeExtUniqueId = "${old.vscodeExtPublisher}.${old.vscodeExtName}-${old.version}";
+      }))
+      (dart-code.flutter.overrideAttrs (old: {
+        vscodeExtUniqueId = "${old.vscodeExtPublisher}.${old.vscodeExtName}-${old.version}";
+      }))
 
       # C# / .NET
       ms-dotnettools.csdevkit
@@ -60,6 +67,7 @@ let
       usernamehw.errorlens
       vincaslt.highlight-matching-tag
       wayou.vscode-todo-highlight
+      vscodevim.vim
 
       anthropic.claude-code
 
