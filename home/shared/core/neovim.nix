@@ -11,6 +11,9 @@
       # lua
       lua-language-server
       stylua
+
+      # typescript
+      typescript-language-server
     ];
   };
 }
