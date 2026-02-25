@@ -8,4 +8,8 @@ _: {
   ];
 
   services.dbus.enable = true;
+
+  # Run unpatched dynamic binaries on NixOS.
+  # Useful for e.g. mise
+  programs.nix-ld.enable = true;
 }
