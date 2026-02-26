@@ -9,17 +9,19 @@
   launchd.agents.colima = {
     enable = true;
     config = {
-      EnvironmentVariables.PATH = lib.makeBinPath ([ pkgs.docker ] ++ [ "/usr" ]);
+      EnvironmentVariables.PATH = lib.makeBinPath [
+        pkgs.colima
+        pkgs.docker
+        pkgs.coreutils
+        "/usr"
+      ] + ":/bin:/sbin";
       ProgramArguments = [
         (lib.getExe pkgs.colima)
         "start"
         "--foreground"
       ];
       RunAtLoad = true;
-      KeepAlive = {
-        Crashed = true;
-        SuccessfulExit = false;
-      };
+      KeepAlive = false;
       StandardErrorPath = "${config.home.homeDirectory}/.tmp/colima.err.log";
       StandardOutPath = "${config.home.homeDirectory}/.tmp/colima.out.log";
     };
