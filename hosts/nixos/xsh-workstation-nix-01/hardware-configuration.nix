@@ -21,6 +21,7 @@
     "uas"
     "usbhid"
     "sd_mod"
+    "r8169" # onboard lan
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
