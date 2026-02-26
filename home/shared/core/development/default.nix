@@ -3,7 +3,7 @@
   imports = [
     ./ghostty
     ./git
-    ./k9s
+    ./k8s
     ./vscode.nix
   ];
 
@@ -15,13 +15,6 @@
     go-task
     htop
     jq
-    k3sup
-    # kubeconform
-    kubectl
-    kubectx
-    kubelogin
-    kubernetes-helm
-    # kustomize
     neofetch
     nixfmt # nix formatter
     nixd # nix language server
