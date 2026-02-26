@@ -36,9 +36,9 @@ let
       }))
 
       # C# / .NET
-      ms-dotnettools.csdevkit
-      ms-dotnettools.csharp
-      ms-dotnettools.vscode-dotnet-runtime
+      #ms-dotnettools.csdevkit
+      #ms-dotnettools.csharp
+      #ms-dotnettools.vscode-dotnet-runtime
 
       # other languages
       dotjoshjohnson.xml
