@@ -19,7 +19,7 @@
     nixfmt # nix formatter
     nixd # nix language server
     velero # backup tool for kubernetes
-    yq
+    yq-go
     zoxide
   ];
 
