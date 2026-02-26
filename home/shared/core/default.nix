@@ -7,6 +7,7 @@
     ./chezmoi.nix
     ./claude-code
     ./development
+    ./github-copilot-cli
     ./internet
     ./mise
     ./neovim.nix
