@@ -7,29 +7,29 @@
   };
 
   home.packages = with pkgs; [
-      ripgrep # https://github.com/BurntSushi/ripgrep
-      fd # https://github.com/sharkdp/fd
+    ripgrep # https://github.com/BurntSushi/ripgrep
+    fd # https://github.com/sharkdp/fd
 
-      tree-sitter
+    tree-sitter
 
-      # compilers / tools needed by tree-sitter, mason, etc.
-      gcc
-      cargo
+    # compilers / tools needed by tree-sitter, mason, etc.
+    gcc
+    cargo
 
-      ####################
-      # Language support #
-      ####################
+    ####################
+    # Language support #
+    ####################
 
-      # lua
-      lua-language-server
-      stylua
+    # lua
+    lua-language-server
+    stylua
 
-      # typescript
-      typescript-language-server
-      vscode-js-debug
+    # typescript
+    typescript-language-server
+    vscode-js-debug
 
-      # nix
-      nixd
-      nixfmt
-    ];
+    # nix
+    nixd
+    nixfmt
+  ];
 }
