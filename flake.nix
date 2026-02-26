@@ -5,6 +5,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -81,6 +82,7 @@
       self,
 
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       noctalia,
       nix-vscode-extensions,
@@ -147,9 +149,16 @@
         )
       ];
       mkNixosConfig =
-        account: hostPath:
+        system: account: hostPath:
         (nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs account; };
+          specialArgs = {
+            inherit inputs account;
+
+            pkgs-stable = import inputs.nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
 
           modules = commonModules ++ [
             ./hosts/nixos
@@ -158,7 +167,14 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                extraSpecialArgs = { inherit inputs account; };
+                extraSpecialArgs = {
+                  inherit inputs account;
+
+                  pkgs-stable = import inputs.nixpkgs-stable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                };
 
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -169,17 +185,31 @@
           ];
         });
       mkDarwinConfig =
-        account: system:
+        system: account:
         (nix-darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit inputs account; };
+          specialArgs = {
+            inherit inputs account;
+
+            pkgs-stable = import inputs.nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
           modules = commonModules ++ [
             ./hosts/darwin
 
             home-manager.darwinModules.home-manager
             {
               home-manager = {
-                extraSpecialArgs = { inherit inputs account; };
+                extraSpecialArgs = {
+                  inherit inputs account;
+
+                  pkgs-stable = import inputs.nixpkgs-stable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                };
 
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -222,18 +252,15 @@
         nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
       nixosConfigurations =
-        (nixpkgs.lib.genAttrs linuxSystems (
-          system: mkNixosConfig defaultAccount ./hosts/nixos/xsh-workstation-nix-01
-        ))
         # Host-specific configurations
-        // {
-          xsh-workstation-nix-01 = mkNixosConfig defaultAccount ./hosts/nixos/xsh-workstation-nix-01;
+        {
+          xsh-workstation-nix-01 = mkNixosConfig "x86_64-linux" defaultAccount ./hosts/nixos/xsh-workstation-nix-01;
         };
 
       darwinConfigurations = {
         # Host-specific configurations only
-        "MB-HY34415F46" = mkDarwinConfig (defaultAccount // { username = "sven.herrle"; }) "aarch64-darwin";
-        "MB-K77H417Q2L" = mkDarwinConfig (defaultAccount // { username = "sven.herrle"; }) "aarch64-darwin";
+        "MB-HY34415F46" = mkDarwinConfig "aarch64-darwin" (defaultAccount // { username = "sven.herrle"; });
+        "MB-K77H417Q2L" = mkDarwinConfig "aarch64-darwin" (defaultAccount // { username = "sven.herrle"; });
       };
     };
 
