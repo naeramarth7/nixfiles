@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -9,10 +10,17 @@
       fd # https://github.com/sharkdp/fd
 
       tree-sitter
-      gcc # treesitter needs this for compile parsers
+
+      # compilers / tools needed by tree-sitter, mason, etc.
+      gcc
+      cargo
+
+      ####################
+      # Language support #
+      ####################
+
+      # nix
+      nixfmt
     ];
   };
-
-  home.packages = with pkgs; [
-  ];
 }
